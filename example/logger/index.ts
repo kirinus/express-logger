@@ -11,9 +11,9 @@ import {
 export let logger: WinstonLogger;
 
 export function init(app: Application): void {
-  const winstonLogger = createWinstonLogger('app');
+  this.logger = createWinstonLogger('app');
   // Use express-winston for logging request information
-  const expressWinstonHandler = createExpressWinstonHandler(winstonLogger.logger);
+  const expressWinstonHandler = createExpressWinstonHandler(this.logger);
   app.use(expressWinstonHandler);
   // Use express-http-context for context injection (request id)
   app.use(httpContextMiddleware);

@@ -1,7 +1,16 @@
 import * as path from 'path';
 import { cleanEnv, str } from 'envalid';
 
-const environments = ['development', 'concurrent', 'unit', 'integration', 'test', 'qa', 'staging', 'production'];
+const environments = [
+  'development',
+  'concurrent',
+  'unit',
+  'integration',
+  'test',
+  'qa',
+  'staging',
+  'production',
+];
 
 /**
  * The object that specifies the format of required vars.
@@ -11,13 +20,13 @@ const validators = {
   ENVIRONMENT: str({
     devDefault: 'development',
     desc: 'The runtime environment',
-    example: 'development',
+    default: 'development',
     choices: environments,
   }),
   LOG_LEVEL: str({
     devDefault: 'debug',
     desc: 'The winston log level',
-    example: 'info',
+    default: 'debug',
     choices: [
       'error',
       'warn',
@@ -39,6 +48,7 @@ const validators = {
   VERSION: str({
     devDefault: 'unknown',
     desc: 'The git commit hash that this server runs',
+    default: 'unknown',
     example: '907fcbfb951e06f90b2519f3b923f2eab25ea9ae',
   }),
 };
