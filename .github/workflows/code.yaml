@@ -56,6 +56,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: 'latest'
-          draft: false
-          prerelease: true
-          title: 'Release Candidate (latest)'
+          draft: true
+          prerelease: false
+          title: 'Release Candidate (@latest)'
