@@ -834,9 +834,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kirinus/express-logger@workspace:.":
+"@kirinus-digital/express-logger@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@kirinus/express-logger@workspace:."
+  resolution: "@kirinus-digital/express-logger@workspace:."
   dependencies:
     "@commitlint/cli": ~12.1.1
     "@commitlint/config-conventional": ~12.1.1

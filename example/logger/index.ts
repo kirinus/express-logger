@@ -6,7 +6,7 @@ import {
   createWinstonLogger,
   httpContextMiddleware,
   requestIdHandler,
-} from '@kirinus/express-logger';
+} from '@kirinus-digital/express-logger';
 
 export let logger: WinstonLogger;
 

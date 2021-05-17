@@ -1,5 +1,5 @@
 {
-  "name": "@kirinus/express-logger",
+  "name": "@kirinus-digital/express-logger",
   "version": "0.0.0",
   "description": "Implementation of an express.js logger using winston and express-winston.",
   "repository": {
