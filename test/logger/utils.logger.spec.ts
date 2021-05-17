@@ -51,14 +51,14 @@ describe('utils logger', () => {
     jest.clearAllMocks();
   });
 
-  describe('create nest winston logger', () => {
+  describe('create winston logger', () => {
     const label = 'unittest';
     const stubFormat = (infoStub: TransformableInfo) => ({
       combine: jest.fn((...args) => args),
       colorize: jest.fn(() => 'colorize'),
-      label: jest.fn(label => label),
+      label: jest.fn((label) => label),
       logstash: jest.fn(() => 'logstash'),
-      printf: jest.fn(templateFunction => templateFunction(infoStub)),
+      printf: jest.fn((templateFunction) => templateFunction(infoStub)),
       timestamp: jest.fn(() => 'timestamp'),
     });
 
@@ -76,6 +76,39 @@ describe('utils logger', () => {
       // In the mock, we also pass the timestamp though in development it is actually not there
       const expectedPrintfFormat = oneLineTrim`
         [fakeEnvironment] info: [app] message {\"requestId\":\"requestId\",\"express\"
+        :{\"req\":{}},\"user\":\"userUuid\"}
+      `;
+      expect(winston.createLogger).toBeCalledWith({
+        level: config.env.LOG_LEVEL,
+        levels: winston.config.npm.levels,
+        format: ['transformExpressMeta', 'transformExpressMeta', { label: 'unittest' }],
+        transports: [
+          { name: 'Stream' },
+          { name: 'Console', format: ['colorize', expectedPrintfFormat] },
+        ],
+      });
+      expect(winston.format.combine).toHaveBeenCalledTimes(2);
+      expect(winston.format.label).toBeCalledWith({ label });
+      expect(winston.format.colorize).toBeCalled();
+      expect(winston.format.printf).toBeCalledWith(expect.any(Function));
+      expect(winston.format.timestamp).not.toBeCalled();
+      expect(winston.format.logstash).not.toBeCalled();
+    });
+
+    test('development with message object', () => {
+      // @ts-ignore
+      config.env.ENVIRONMENT = 'development';
+      // @ts-ignore
+      config.isKubernetesEnv = false;
+
+      // @ts-ignore: need to remock the format as it was call with a function first time
+      winston.format = stubFormat({ ...infoStub, message: { description: 'unit-test' } });
+
+      createWinstonLogger(label);
+
+      // In the mock, we also pass the timestamp though in development it is actually not there
+      const expectedPrintfFormat = oneLineTrim`
+        [fakeEnvironment] info: [app] {\"description\":\"unit-test\"} {\"requestId\":\"requestId\",\"express\"
         :{\"req\":{}},\"user\":\"userUuid\"}
       `;
       expect(winston.createLogger).toBeCalledWith({
@@ -140,7 +173,7 @@ describe('utils logger', () => {
 
       test('to /dev/null in other platforms', () => {
         // tslint:disable-next-line: ter-arrow-parens
-        (['darwin', 'freebsd', 'linux', 'sunos'] as NodeJS.Platform[]).forEach(platform => {
+        (['darwin', 'freebsd', 'linux', 'sunos'] as NodeJS.Platform[]).forEach((platform) => {
           jest.spyOn(fs, 'createWriteStream').mockImplementationOnce(jest.fn());
           Object.defineProperty(process, 'platform', { value: platform });
           createWinstonLogger(label);

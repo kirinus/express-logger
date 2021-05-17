@@ -72,7 +72,12 @@ function formatLog(info: TransformableInfo) {
   // Collect all fields independently, ignore meta and stringify the rest
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { environment, level, label, timestamp, message, meta, splat, ...rest } = info;
-  return `[${environment}] ${level}: [${label}] ${message} ${JSON.stringify(rest)}`;
+  let messageOutput = message;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((message as any) instanceof Object) {
+    messageOutput = JSON.stringify(message);
+  }
+  return `[${environment}] ${level}: [${label}] ${messageOutput} ${JSON.stringify(rest)}`;
 }
 
 /**
@@ -96,7 +101,7 @@ export function createWinstonLogger(label: string): WinstonLogger {
     // Development formats
     consoleTransport.format = format.combine(
       format.colorize(),
-      format.printf(info => formatLog(info)),
+      format.printf((info) => formatLog(info)),
     );
     logTransporters.push(consoleTransport);
   } else if (isKubernetesEnv) {
@@ -145,7 +150,7 @@ function sanitizeHeaders(req: Request, propName: string) {
         .join('; ');
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
   return (req as any)[propName];
 }
 

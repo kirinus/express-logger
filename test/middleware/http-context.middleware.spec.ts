@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { getRequestIdContext, requestIdHandler } from '../../src/';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
 const uuidv4Mock: typeof uuidv4 & jest.Mock = uuidv4 as any;
 
 jest.mock('express-http-context', () => ({
