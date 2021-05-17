@@ -1,0 +1,10 @@
+**/.cache/**
+**/.errors/**
+**/.vscode/**
+**/.yarn/**
+**/build/**
+**/coverage/**
+**/lib/**
+**/*.json
+**/*.md
+**/*.yaml

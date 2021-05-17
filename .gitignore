@@ -1,0 +1,44 @@
+## Dotenv
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
+yarn-error.log
+
+# Jest
+coverage/
+test/.coverage/
+
+## ESLint
+.eslintcache
+
+## macOS
+.DS_Store
+
+# IDE files
+.idea
+.vscode
+*.idea*
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.atom-build.yml
+.editorconfig
+
+## TypeScript
+tsconfig.tsbuildinfo
+
+## Yarn
+node_modules/
+yarn-debug.log*
+yarn-error.log*
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions

@@ -1,0 +1,75 @@
+{
+  "name": "@kirinus/express-logger",
+  "version": "0.0.0",
+  "description": "Implementation of an express logger using winston and express-winston.",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/kirinus/express-logger.git"
+  },
+  "author": "KIRINUS Digital <development@kirinus.digital>",
+  "license": "MIT",
+  "main": "lib/src/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "lib/src/index.js",
+    "lib"
+  ],
+  "types": "lib/src/index.d.ts",
+  "keywords": [
+    "express",
+    "logger",
+    "node",
+    "winston"
+  ],
+  "scripts": {
+    "build": "tsc -b -v",
+    "lint": "eslint --cache --parser-options \"{ tsconfigRootDir: $(pwd), project: '$(pwd)/tsconfig.json' }\" --cache-file $(pwd)/.eslintcache $(pwd)/src $(pwd)/test",
+    "test": "jest --coverage --verbose --no-cache"
+  },
+  "dependencies": {
+    "envalid": "~6.0.2",
+    "express": "^4.17.1",
+    "express-http-context": "~1.2.4",
+    "express-winston": "~4.1.0",
+    "logform": "^2.2.0",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3",
+    "winston-transport": "^4.4.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "~12.1.1",
+    "@commitlint/config-conventional": "~12.1.1",
+    "@types/common-tags": "~1.8.0",
+    "@types/express": "^4.17.11",
+    "@types/jest": "~26.0.23",
+    "@types/node": "~14.14.45",
+    "@types/uuid": "~8.3.0",
+    "@typescript-eslint/eslint-plugin": "~4.22.0",
+    "@typescript-eslint/parser": "~4.22.0",
+    "@yarnpkg/pnpify": "~3.0.0-rc.3",
+    "common-tags": "~1.8.0",
+    "eslint": "~7.24.0",
+    "eslint-config-prettier": "~8.2.0",
+    "eslint-import-resolver-node": "~0.3.4",
+    "eslint-plugin-eslint-comments": "~3.2.0",
+    "eslint-plugin-import": "~2.22.1",
+    "eslint-plugin-jest": "~24.3.5",
+    "eslint-plugin-node": "~11.1.0",
+    "eslint-plugin-ordered-imports": "~0.4.1",
+    "husky": "~6.0.0",
+    "jest": "~26.6.3",
+    "jest-environment-node": "~26.6.2",
+    "prettier": "~2.3.0",
+    "pretty-quick": "~3.1.0",
+    "ts-jest": "~26.5.6",
+    "typescript": "~4.2.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn build"
+    }
+  }
+}
