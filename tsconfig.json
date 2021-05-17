@@ -1,18 +1,30 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "alwaysStrict": true,
+    "composite": true,
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "lib": ["es2017"],
+    "module": "commonjs",
     "newLine": "lf",
-    "noEmit": true,
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "outDir": "lib",
+    "preserveConstEnums": true,
     "preserveSymlinks": true,
     "pretty": true,
     "removeComments": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "target": "es6"
   },
   "include": ["src/**/*.ts", "test/**/*.ts"]
 }
