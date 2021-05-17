@@ -1,7 +1,7 @@
 {
   "name": "@kirinus/express-logger",
   "version": "0.0.0",
-  "description": "Implementation of an express logger using winston and express-winston.",
+  "description": "Implementation of an Express logger using Winston.",
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/kirinus/express-logger.git"
