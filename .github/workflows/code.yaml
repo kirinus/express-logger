@@ -54,6 +54,6 @@ jobs:
       - name: Create release
         uses: 'marvinpinto/action-automatic-releases@latest'
         with:
+          repo_token: '${{ secrets.REPO_ACCESS_TOKEN }}'
           draft: true
           prerelease: false
-          repo_token: '${{ secrets.REPO_ACCESS_TOKEN }}'
