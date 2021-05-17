@@ -26,5 +26,6 @@
     "strictPropertyInitialization": true,
     "target": "es6"
   },
-  "include": ["example/**/*.ts", "src/**/*.ts", "test/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "exclude": ["lib"]
 }
