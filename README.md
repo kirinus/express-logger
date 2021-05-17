@@ -21,4 +21,4 @@ import {
 
 ### Basic Example
 
-Add the following to your `index.ts` / `main.ts`:
+See the `example` directory.
