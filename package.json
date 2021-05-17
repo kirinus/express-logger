@@ -26,8 +26,8 @@
   ],
   "scripts": {
     "build": "tsc -b -v",
+    "init:husky": "husky install",
     "lint": "eslint --cache --parser-options \"{ tsconfigRootDir: $(pwd), project: '$(pwd)/tsconfig.json' }\" --cache-file $(pwd)/.eslintcache $(pwd)/src $(pwd)/test",
-    "postinstall": "husky install",
     "test": "jest --coverage --verbose --no-cache"
   },
   "dependencies": {
