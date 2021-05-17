@@ -1,6 +1,6 @@
 export declare const env: Readonly<{
     ENVIRONMENT: string;
-    LOG_LEVEL: "debug" | "info" | "error" | "warn" | "help" | "data" | "prompt" | "http" | "verbose" | "input" | "silly";
+    LOG_LEVEL: "debug" | "error" | "warn" | "help" | "data" | "info" | "prompt" | "http" | "verbose" | "input" | "silly";
     NODE_ENV: string;
     VERSION: "unknown";
 }> & import("envalid").CleanEnv & {
