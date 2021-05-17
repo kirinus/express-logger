@@ -169,7 +169,7 @@ export function createExpressWinstonHandler(logger: Logger): Handler {
     expressFormat: false,
     colorize: env.ENVIRONMENT === 'development',
     requestFilter: sanitizeHeaders,
-    headerBlacklist: ['cookie'],
+    headerBlacklist: ['cookie', 'portal-authentication-token', 'token'],
     ignoreRoute: () => false,
   });
 }
