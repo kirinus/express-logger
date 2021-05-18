@@ -1,4 +1,9 @@
-export { createExpressWinstonHandler, createWinstonLogger, WinstonLogger } from './logger';
+export {
+  createExpressWinstonHandler,
+  createWinstonLogger,
+  formatLogstash,
+  WinstonLogger,
+} from './logger';
 export {
   getRequestIdContext,
   httpContextMiddleware,

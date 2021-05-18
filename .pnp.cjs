@@ -64,6 +64,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["logform", "npm:2.2.0"],
             ["prettier", "npm:2.3.0"],
             ["pretty-quick", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.1.0"],
+            ["safe-stable-stringify", "npm:1.1.1"],
             ["ts-jest", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:26.5.6"],
             ["typescript", "patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=34ad7d"],
             ["uuid", "npm:8.3.2"],
@@ -1149,6 +1150,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["logform", "npm:2.2.0"],
             ["prettier", "npm:2.3.0"],
             ["pretty-quick", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.1.0"],
+            ["safe-stable-stringify", "npm:1.1.1"],
             ["ts-jest", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:26.5.6"],
             ["typescript", "patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=34ad7d"],
             ["uuid", "npm:8.3.2"],
@@ -8776,6 +8778,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["safe-regex", "npm:1.1.0"],
             ["ret", "npm:0.1.15"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["safe-stable-stringify", [
+        ["npm:1.1.1", {
+          "packageLocation": "./.yarn/cache/safe-stable-stringify-npm-1.1.1-1c282e1c55-e32a30720e.zip/node_modules/safe-stable-stringify/",
+          "packageDependencies": [
+            ["safe-stable-stringify", "npm:1.1.1"]
           ],
           "linkType": "HARD",
         }]

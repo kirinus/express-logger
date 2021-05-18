@@ -82,8 +82,8 @@ module.exports = {
             format: ['camelCase'],
             filter: {
               regex: '^_+$',
-              match: false
-            }
+              match: false,
+            },
           },
           {
             selector: 'enumMember',
@@ -103,6 +103,8 @@ module.exports = {
             format: ['camelCase', 'UPPER_CASE'],
           },
         ],
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_+$' }],
         '@typescript-eslint/restrict-template-expressions': ['error', { allowAny: true }],
       },
@@ -123,6 +125,7 @@ module.exports = {
         jest: true,
       },
       rules: {
+        '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-call': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
         'jest/expect-expect': [

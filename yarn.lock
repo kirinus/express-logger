@@ -867,6 +867,7 @@ __metadata:
     logform: ^2.2.0
     prettier: ~2.3.0
     pretty-quick: ~3.1.0
+    safe-stable-stringify: ^1.1.1
     ts-jest: ~26.5.6
     typescript: ~4.2.4
     uuid: ^8.3.2
@@ -7450,6 +7451,13 @@ fsevents@^2.1.2:
   dependencies:
     ret: ~0.1.10
   checksum: 9a8bba57c87a841f7997b3b951e8e403b1128c1a4fd1182f40cc1a20e2d490593d7c2a21030fadfea320c8e859219019e136f678c6689ed5960b391b822f01d5
+  languageName: node
+  linkType: hard
+
+"safe-stable-stringify@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "safe-stable-stringify@npm:1.1.1"
+  checksum: e32a30720e8a2e3043b8b96733f015c1aa7a21a5a328074ce917b8afe4d26b4308c186c74fa92131e5f794b1efc63caa32defafceaa2981accaaedbc8b2c861c
   languageName: node
   linkType: hard
 

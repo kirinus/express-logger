@@ -5,12 +5,11 @@ import { oneLineTrim } from 'common-tags';
 import { TransformableInfo } from 'logform';
 
 import * as config from '../../src/config';
-import { createExpressWinstonHandler, createWinstonLogger } from '../../src';
+import { createExpressWinstonHandler, createWinstonLogger, formatLogstash } from '../../src';
 
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 jest.mock('winston', () => ({
   createLogger: jest.fn(),
   config: {
@@ -75,8 +74,7 @@ describe('utils logger', () => {
 
       // In the mock, we also pass the timestamp though in development it is actually not there
       const expectedPrintfFormat = oneLineTrim`
-        [fakeEnvironment] info: [app] message {\"requestId\":\"requestId\",\"express\"
-        :{\"req\":{}},\"user\":\"userUuid\"}
+        [fakeEnvironment] info: [app] message {\"express\":{\"req\":{}},\"requestId\":\"requestId\",\"user\":\"userUuid\"}
       `;
       expect(winston.createLogger).toBeCalledWith({
         level: config.env.LOG_LEVEL,
@@ -108,8 +106,7 @@ describe('utils logger', () => {
 
       // In the mock, we also pass the timestamp though in development it is actually not there
       const expectedPrintfFormat = oneLineTrim`
-        [fakeEnvironment] info: [app] {\"description\":\"unit-test\"} {\"requestId\":\"requestId\",\"express\"
-        :{\"req\":{}},\"user\":\"userUuid\"}
+        [fakeEnvironment] info: [app] {\"description\":\"unit-test\"} {\"express\":{\"req\":{}},\"requestId\":\"requestId\",\"user\":\"userUuid\"}
       `;
       expect(winston.createLogger).toBeCalledWith({
         level: config.env.LOG_LEVEL,
@@ -143,13 +140,54 @@ describe('utils logger', () => {
         level: config.env.LOG_LEVEL,
         levels: winston.config.npm.levels,
         format: ['transformExpressMeta', 'transformExpressMeta', { label: 'unittest' }],
-        transports: [{ name: 'Stream' }, { name: 'Console', format: ['timestamp', 'logstash'] }],
+        transports: [
+          { name: 'Stream' },
+          { name: 'Console', format: ['timestamp', { options: {} }] },
+        ],
       });
       expect(winston.format.combine).toHaveBeenCalledTimes(2);
       expect(winston.format.label).toBeCalledWith({ label });
       expect(winston.format.colorize).not.toBeCalled();
       expect(winston.format.timestamp).toBeCalled();
-      expect(winston.format.logstash).toBeCalled();
+    });
+
+    describe('formatLogstash', () => {
+      test('with string', () => {
+        const expectedPrintfFormat = {
+          level: 'info',
+          message:
+            '{"@fields":{"level":"info"},"@message":"string-test","@timestamp":"2021-05-18T19:32:31.495Z"}',
+        };
+        const formatter = formatLogstash();
+        expect(
+          formatter.transform({
+            level: 'info',
+            message: 'string-test',
+            timestamp: '2021-05-18T19:32:31.495Z',
+          }),
+        ).toMatchObject(expectedPrintfFormat);
+      });
+
+      test('with object', () => {
+        const expectedPrintfFormat = {
+          level: 'info',
+          message: '{"@fields":{"level":"info"},"@message":"{\\"description\\":\\"unit-test\\"}"}',
+        };
+        const formatter = formatLogstash();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        expect(
+          formatter.transform({ level: 'info', message: { description: 'unit-test' } as any }),
+        ).toMatchObject(expectedPrintfFormat);
+      });
+
+      test('without a message', () => {
+        const expectedPrintfFormat = { level: 'info', message: '{"@fields":{"level":"info"}}' };
+        const formatter = formatLogstash();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        expect(formatter.transform({ level: 'info', message: undefined as any })).toMatchObject(
+          expectedPrintfFormat,
+        );
+      });
     });
 
     describe('stream transport', () => {
@@ -220,4 +258,3 @@ describe('utils logger', () => {
 /* eslint-enable @typescript-eslint/naming-convention */
 /* eslint-enable @typescript-eslint/no-unsafe-return */
 /* eslint-enable @typescript-eslint/ban-ts-comment */
-/* eslint-enable @typescript-eslint/no-unsafe-assignment */

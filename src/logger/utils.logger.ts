@@ -1,9 +1,10 @@
+import jsonStringify from 'safe-stable-stringify';
 import * as expressWinston from 'express-winston';
 import * as fs from 'fs';
 import * as Transport from 'winston-transport';
 import { Handler } from 'express';
 import { Request } from 'express';
-import { TransformableInfo } from 'logform';
+import { TransformableInfo, format as logformFormat } from 'logform';
 import { Logger, config, createLogger, format, transports } from 'winston';
 
 import { env, isKubernetesEnv } from '../config';
@@ -62,6 +63,15 @@ const errorsFormat = format((info) => {
   return info;
 });
 
+function formatMessage(message: string): string {
+  let formattedMessage = message;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((message as any) instanceof Object) {
+    formattedMessage = jsonStringify(message);
+  }
+  return formattedMessage;
+}
+
 /**
  * Retrieve a custom log formatted entry. Useful for print only!
  *
@@ -72,13 +82,26 @@ function formatLog(info: TransformableInfo) {
   // Collect all fields independently, ignore meta and stringify the rest
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { environment, level, label, timestamp, message, meta, splat, ...rest } = info;
-  let messageOutput = message;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if ((message as any) instanceof Object) {
-    messageOutput = JSON.stringify(message);
-  }
-  return `[${environment}] ${level}: [${label}] ${messageOutput} ${JSON.stringify(rest)}`;
+  return `[${environment}] ${level}: [${label}] ${formatMessage(message)} ${jsonStringify(rest)}`;
 }
+
+/**
+ * Returns a new instance of the LogStash Format that turns a log
+ * `info` object into pure JSON with the appropriate logstash options.
+ */
+export const formatLogstash = logformFormat((info) => {
+  const logstash: { '@fields'?: unknown; '@message'?: string; '@timestamp'?: unknown } = {};
+  const { message, timestamp, ...rest } = info;
+  if (message) {
+    logstash['@message'] = formatMessage(message);
+  }
+  if (timestamp) {
+    logstash['@timestamp'] = timestamp;
+  }
+  logstash['@fields'] = rest;
+  info.message = jsonStringify(logstash);
+  return info;
+});
 
 /**
  * Create a labelled `winston` logger instance.
@@ -106,7 +129,7 @@ export function createWinstonLogger(label: string): WinstonLogger {
     logTransporters.push(consoleTransport);
   } else if (isKubernetesEnv) {
     // Production formats (logstash in Kubernetes)
-    consoleTransport.format = format.combine(format.timestamp(), format.logstash());
+    consoleTransport.format = format.combine(format.timestamp(), formatLogstash());
     logTransporters.push(consoleTransport);
   }
 

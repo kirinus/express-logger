@@ -36,6 +36,7 @@
     "express-http-context": "~1.2.4",
     "express-winston": "~4.1.0",
     "logform": "^2.2.0",
+    "safe-stable-stringify": "^1.1.1",
     "uuid": "^8.3.2",
     "winston": "^3.3.3",
     "winston-transport": "^4.4.0"
