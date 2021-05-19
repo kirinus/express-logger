@@ -4,7 +4,8 @@ import * as fs from 'fs';
 import * as Transport from 'winston-transport';
 import { Handler } from 'express';
 import { Request } from 'express';
-import { TransformableInfo } from 'logform';
+import { TransformableInfo, format as logformFormat } from 'logform';
+import { MESSAGE } from 'triple-beam';
 import { Logger, config, createLogger, format, transports } from 'winston';
 
 import { env, isKubernetesEnv } from '../config';
@@ -89,7 +90,7 @@ function formatLog(info: TransformableInfo) {
  * Returns a new instance of the LogStash Format that turns a log
  * `info` object into pure JSON with the appropriate logstash options.
  */
-export const formatLogstash = format((info) => {
+export const formatLogstash = logformFormat((info) => {
   const logstash: { '@fields'?: unknown; '@message'?: string; '@timestamp'?: unknown } = {};
   const { message, timestamp, ...rest } = info;
   console.log(info);
@@ -104,7 +105,9 @@ export const formatLogstash = format((info) => {
   console.log(logstash);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  info[Symbol('message')] = jsonStringify(logstash);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  info[MESSAGE] = jsonStringify(logstash);
+  // info[Symbol('message')] = jsonStringify(logstash);
   console.log(info);
   console.log('-------');
   return info;
