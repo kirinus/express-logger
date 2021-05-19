@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as Transport from 'winston-transport';
 import { Handler } from 'express';
 import { Request } from 'express';
-import { TransformableInfo, format as logformFormat } from 'logform';
+import { TransformableInfo } from 'logform';
 import { Logger, config, createLogger, format, transports } from 'winston';
 
 import { env, isKubernetesEnv } from '../config';
@@ -89,7 +89,7 @@ function formatLog(info: TransformableInfo) {
  * Returns a new instance of the LogStash Format that turns a log
  * `info` object into pure JSON with the appropriate logstash options.
  */
-export const formatLogstash = logformFormat((info) => {
+export const formatLogstash = format((info) => {
   const logstash: { '@fields'?: unknown; '@message'?: string; '@timestamp'?: unknown } = {};
   const { message, timestamp, ...rest } = info;
   console.log(info);
