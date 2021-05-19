@@ -93,7 +93,6 @@ function formatLog(info: TransformableInfo) {
 export const formatLogstash = logformFormat((info) => {
   const logstash: { '@fields'?: unknown; '@message'?: string; '@timestamp'?: unknown } = {};
   const { message, timestamp, ...rest } = info;
-  console.log(info);
   info = rest as TransformableInfo;
   if (message) {
     logstash['@message'] = formatMessage(message);
@@ -102,14 +101,10 @@ export const formatLogstash = logformFormat((info) => {
     logstash['@timestamp'] = timestamp;
   }
   logstash['@fields'] = rest;
-  console.log(logstash);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   info[MESSAGE] = jsonStringify(logstash);
-  // info[Symbol('message')] = jsonStringify(logstash);
-  console.log(info);
-  console.log('-------');
   return info;
 });
 
