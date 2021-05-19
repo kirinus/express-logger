@@ -92,6 +92,7 @@ function formatLog(info: TransformableInfo) {
 export const formatLogstash = logformFormat((info) => {
   const logstash: { '@fields'?: unknown; '@message'?: string; '@timestamp'?: unknown } = {};
   const { message, timestamp, ...rest } = info;
+  console.log(info);
   if (message) {
     logstash['@message'] = formatMessage(message);
   }
@@ -99,7 +100,10 @@ export const formatLogstash = logformFormat((info) => {
     logstash['@timestamp'] = timestamp;
   }
   logstash['@fields'] = rest;
-  info.message = jsonStringify(logstash);
+  console.log(logstash);
+  info['message'] = jsonStringify(logstash);
+  console.log(info);
+  console.log('-------');
   return info;
 });
 
@@ -126,12 +130,14 @@ export function createWinstonLogger(label: string): WinstonLogger {
       format.colorize(),
       format.printf((info) => formatLog(info)),
     );
-    logTransporters.push(consoleTransport);
+    // logTransporters.push(consoleTransport);
   } else if (isKubernetesEnv) {
     // Production formats (logstash in Kubernetes)
-    consoleTransport.format = format.combine(format.timestamp(), formatLogstash());
-    logTransporters.push(consoleTransport);
+    // consoleTransport.format = format.combine(format.timestamp(), formatLogstash());
+    // logTransporters.push(consoleTransport);
   }
+  consoleTransport.format = format.combine(format.timestamp(), formatLogstash());
+  logTransporters.push(consoleTransport);
 
   return new WinstonLogger(
     createLogger({
