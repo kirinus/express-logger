@@ -101,7 +101,9 @@ export const formatLogstash = logformFormat((info) => {
   }
   logstash['@fields'] = rest;
   console.log(logstash);
-  info['message'] = jsonStringify(logstash);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  info[Symbol('message')] = jsonStringify(logstash);
   console.log(info);
   console.log('-------');
   return info;
