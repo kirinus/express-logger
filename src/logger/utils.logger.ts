@@ -93,6 +93,7 @@ export const formatLogstash = logformFormat((info) => {
   const logstash: { '@fields'?: unknown; '@message'?: string; '@timestamp'?: unknown } = {};
   const { message, timestamp, ...rest } = info;
   console.log(info);
+  info = rest as TransformableInfo;
   if (message) {
     logstash['@message'] = formatMessage(message);
   }
