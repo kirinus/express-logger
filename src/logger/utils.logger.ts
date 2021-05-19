@@ -131,14 +131,12 @@ export function createWinstonLogger(label: string): WinstonLogger {
       format.colorize(),
       format.printf((info) => formatLog(info)),
     );
-    // logTransporters.push(consoleTransport);
+    logTransporters.push(consoleTransport);
   } else if (isKubernetesEnv) {
     // Production formats (logstash in Kubernetes)
-    // consoleTransport.format = format.combine(format.timestamp(), formatLogstash());
-    // logTransporters.push(consoleTransport);
+    consoleTransport.format = format.combine(format.timestamp(), formatLogstash());
+    logTransporters.push(consoleTransport);
   }
-  consoleTransport.format = format.combine(format.timestamp(), formatLogstash());
-  logTransporters.push(consoleTransport);
 
   return new WinstonLogger(
     createLogger({
