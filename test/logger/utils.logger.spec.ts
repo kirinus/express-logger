@@ -174,9 +174,9 @@ describe('utils logger', () => {
             '{"@fields":{"level":"info"},"@message":"{\\"description\\":\\"unit-test\\"}"}',
         };
         expect(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           formatLogstash().transform({
             level: 'info',
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             message: { description: 'unit-test' } as any,
           }),
         ).toMatchObject(expectedPrintfFormat);
@@ -187,8 +187,8 @@ describe('utils logger', () => {
           level: 'info',
           [Symbol('message')]: '{"@fields":{"level":"info"}}',
         };
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         expect(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           formatLogstash().transform({ level: 'info', message: undefined as any }),
         ).toMatchObject(expectedPrintfFormat);
       });
