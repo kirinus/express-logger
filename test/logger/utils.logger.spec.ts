@@ -155,12 +155,11 @@ describe('utils logger', () => {
       test('with string', () => {
         const expectedPrintfFormat = {
           level: 'info',
-          message:
+          [Symbol('message')]:
             '{"@fields":{"level":"info"},"@message":"string-test","@timestamp":"2021-05-18T19:32:31.495Z"}',
         };
-        const formatter = formatLogstash();
         expect(
-          formatter.transform({
+          formatLogstash().transform({
             level: 'info',
             message: 'string-test',
             timestamp: '2021-05-18T19:32:31.495Z',
@@ -171,22 +170,27 @@ describe('utils logger', () => {
       test('with object', () => {
         const expectedPrintfFormat = {
           level: 'info',
-          message: '{"@fields":{"level":"info"},"@message":"{\\"description\\":\\"unit-test\\"}"}',
+          [Symbol('message')]:
+            '{"@fields":{"level":"info"},"@message":"{\\"description\\":\\"unit-test\\"}"}',
         };
-        const formatter = formatLogstash();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         expect(
-          formatter.transform({ level: 'info', message: { description: 'unit-test' } as any }),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          formatLogstash().transform({
+            level: 'info',
+            message: { description: 'unit-test' } as any,
+          }),
         ).toMatchObject(expectedPrintfFormat);
       });
 
       test('without a message', () => {
-        const expectedPrintfFormat = { level: 'info', message: '{"@fields":{"level":"info"}}' };
-        const formatter = formatLogstash();
+        const expectedPrintfFormat = {
+          level: 'info',
+          [Symbol('message')]: '{"@fields":{"level":"info"}}',
+        };
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        expect(formatter.transform({ level: 'info', message: undefined as any })).toMatchObject(
-          expectedPrintfFormat,
-        );
+        expect(
+          formatLogstash().transform({ level: 'info', message: undefined as any }),
+        ).toMatchObject(expectedPrintfFormat);
       });
     });
 
