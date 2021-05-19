@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/express", "npm:4.17.11"],
             ["@types/jest", "npm:26.0.23"],
             ["@types/node", "npm:14.14.45"],
+            ["@types/triple-beam", "npm:1.3.2"],
             ["@types/uuid", "npm:8.3.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:4.22.1"],
             ["@typescript-eslint/parser", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:4.22.1"],
@@ -65,6 +66,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.3.0"],
             ["pretty-quick", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.1.0"],
             ["safe-stable-stringify", "npm:1.1.1"],
+            ["triple-beam", "npm:1.3.0"],
             ["ts-jest", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:26.5.6"],
             ["typescript", "patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=34ad7d"],
             ["uuid", "npm:8.3.2"],
@@ -1127,6 +1129,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/express", "npm:4.17.11"],
             ["@types/jest", "npm:26.0.23"],
             ["@types/node", "npm:14.14.45"],
+            ["@types/triple-beam", "npm:1.3.2"],
             ["@types/uuid", "npm:8.3.0"],
             ["@typescript-eslint/eslint-plugin", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:4.22.1"],
             ["@typescript-eslint/parser", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:4.22.1"],
@@ -1151,6 +1154,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.3.0"],
             ["pretty-quick", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.1.0"],
             ["safe-stable-stringify", "npm:1.1.1"],
+            ["triple-beam", "npm:1.3.0"],
             ["ts-jest", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:26.5.6"],
             ["typescript", "patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=34ad7d"],
             ["uuid", "npm:8.3.2"],
@@ -1608,6 +1612,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-treeify-npm-1.0.0-b5e04e9cd3-1b2397030d.zip/node_modules/@types/treeify/",
           "packageDependencies": [
             ["@types/treeify", "npm:1.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/triple-beam", [
+        ["npm:1.3.2", {
+          "packageLocation": "./.yarn/cache/@types-triple-beam-npm-1.3.2-e1699700a8-dd7b4a563f.zip/node_modules/@types/triple-beam/",
+          "packageDependencies": [
+            ["@types/triple-beam", "npm:1.3.2"]
           ],
           "linkType": "HARD",
         }]

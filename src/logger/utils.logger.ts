@@ -5,6 +5,7 @@ import * as Transport from 'winston-transport';
 import { Handler } from 'express';
 import { Request } from 'express';
 import { TransformableInfo, format as logformFormat } from 'logform';
+import { MESSAGE } from 'triple-beam';
 import { Logger, config, createLogger, format, transports } from 'winston';
 
 import { env, isKubernetesEnv } from '../config';
@@ -92,6 +93,7 @@ function formatLog(info: TransformableInfo) {
 export const formatLogstash = logformFormat((info) => {
   const logstash: { '@fields'?: unknown; '@message'?: string; '@timestamp'?: unknown } = {};
   const { message, timestamp, ...rest } = info;
+  info = rest as TransformableInfo;
   if (message) {
     logstash['@message'] = formatMessage(message);
   }
@@ -99,7 +101,10 @@ export const formatLogstash = logformFormat((info) => {
     logstash['@timestamp'] = timestamp;
   }
   logstash['@fields'] = rest;
-  info.message = jsonStringify(logstash);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  info[MESSAGE] = jsonStringify(logstash);
   return info;
 });
 
