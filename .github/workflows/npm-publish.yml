@@ -1,5 +1,5 @@
 name: NPM Publish
-true:
+"on":
   release:
     types:
     - published
