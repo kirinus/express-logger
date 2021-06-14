@@ -55,6 +55,7 @@
     "@typescript-eslint/parser": "~4.22.0",
     "@yarnpkg/pnpify": "~3.0.0-rc.3",
     "common-tags": "~1.8.0",
+    "danger": "~10.6.4",
     "eslint": "~7.24.0",
     "eslint-config-prettier": "~8.2.0",
     "eslint-import-resolver-node": "~0.3.4",
