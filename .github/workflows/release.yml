@@ -1,0 +1,19 @@
+name: Release
+"on":
+  push:
+    branches:
+    - main
+  workflow_dispatch: null
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create release draft
+      uses: darioblanco/release-wizard@main
+      with:
+        draft: true
+        taskBaseUrl: null
+        taskPrefix: null
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        pushTag: false
+        withV: true

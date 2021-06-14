@@ -1,0 +1,38 @@
+name: PR
+"on":
+  pull_request:
+    types:
+    - opened
+    - edited
+    - reopened
+    - synchronize
+jobs:
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout current git repository
+      uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+    - name: Install yarn dependencies
+      run: yarn install --frozen-lockfile
+    - name: Run Danger
+      run: yarn danger ci
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+  labeler:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Label PR based on branch name
+      if: github.event.action == 'opened'
+      uses: ffittschen/pr-branch-labeler@v1
+      with:
+        repo-token: ${{ github.token }}
+    - name: Label PR based on pushed file paths
+      uses: actions/labeler@v3
+      with:
+        repo-token: ${{ github.token }}
+        configuration-path: .github/pr-path-labeler.yml
+        sync-labels: false
