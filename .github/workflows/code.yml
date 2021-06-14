@@ -5,8 +5,8 @@ on:
     branches:
       - 'main'
     paths:
-      - '.github/workflows/code.yaml'
-      - '.github/workflows/publish.yaml'
+      - '.github/workflows/code.yml'
+      - '.github/workflows/publish.yml'
       - 'package.json'
       - 'lib/**'
       - 'README.md'
@@ -15,8 +15,8 @@ on:
       - 'tsconfig.json'
   pull_request:
     paths:
-      - '.github/workflows/code.yaml'
-      - '.github/workflows/publish.yaml'
+      - '.github/workflows/code.yml'
+      - '.github/workflows/publish.yml'
       - 'package.json'
       - 'lib/**'
       - 'README.md'
