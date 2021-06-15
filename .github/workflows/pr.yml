@@ -17,7 +17,7 @@ jobs:
       with:
         node-version: 14.x
     - name: Install yarn dependencies
-      run: yarn install --frozen-lockfile
+      run: yarn install --immutable
     - name: Run Danger
       run: yarn danger ci
       env:
