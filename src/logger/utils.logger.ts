@@ -35,13 +35,15 @@ const stderrLevels = ['error'];
  */
 /* istanbul ignore next */
 // tslint:disable-next-line: ter-arrow-parens
-const injectMeta = format((info) => {
+const injectMeta = format((info) => attachMeta(info));
+
+function attachMeta(info: TransformableInfo) {
   info.requestId = getRequestIdContext();
   // Add extra metadata from the config
   info.environment = env.ENVIRONMENT;
   info.version = env.VERSION;
   return info;
-});
+}
 
 /* istanbul ignore next */
 function serializeError(error: Error) {
@@ -81,6 +83,7 @@ function formatMessage(message: string): string {
  */
 function formatLog(info: TransformableInfo) {
   // Collect all fields independently, ignore meta and stringify the rest
+  attachMeta(info);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { environment, level, label, timestamp, message, meta, splat, ...rest } = info;
   return `[${environment}] ${level}: [${label}] ${formatMessage(message)} ${jsonStringify(rest)}`;
@@ -92,6 +95,7 @@ function formatLog(info: TransformableInfo) {
  */
 export const formatLogstash = logformFormat((info) => {
   const logstash: { '@fields'?: unknown; '@message'?: string; '@timestamp'?: unknown } = {};
+  attachMeta(info);
   const { message, timestamp, ...rest } = info;
   info = rest as TransformableInfo;
   if (message) {

@@ -1,3 +1,4 @@
+import * as httpContext from 'express-http-context';
 import * as expressWinston from 'express-winston';
 import * as fs from 'fs';
 import * as winston from 'winston';
@@ -36,6 +37,10 @@ jest.mock('../../src/config', () => ({
 }));
 
 describe('utils logger', () => {
+  const requestId = '75e10ee1-6c92-4c58-b639-8a5875da1820';
+  // @ts-ignore
+  httpContext.get = jest.fn(() => requestId);
+
   const infoStub = {
     level: 'info',
     label: 'app',
@@ -66,6 +71,8 @@ describe('utils logger', () => {
       config.env.ENVIRONMENT = 'development';
       // @ts-ignore
       config.isKubernetesEnv = false;
+      // @ts-ignore
+      config.env.VERSION = 'commit-sha';
 
       // @ts-ignore: need to remock the format as it was call with a function first time
       winston.format = stubFormat(infoStub);
@@ -74,7 +81,7 @@ describe('utils logger', () => {
 
       // In the mock, we also pass the timestamp though in development it is actually not there
       const expectedPrintfFormat = oneLineTrim`
-        [fakeEnvironment] info: [app] message {\"express\":{\"req\":{}},\"requestId\":\"requestId\",\"user\":\"userUuid\"}
+        [${config.env.ENVIRONMENT}] info: [app] message {\"express\":{\"req\":{}},\"requestId\":\"${requestId}\",\"user\":\"userUuid\",\"version\":\"${config.env.VERSION}\"}
       `;
       expect(winston.createLogger).toBeCalledWith({
         level: config.env.LOG_LEVEL,
@@ -98,6 +105,8 @@ describe('utils logger', () => {
       config.env.ENVIRONMENT = 'development';
       // @ts-ignore
       config.isKubernetesEnv = false;
+      // @ts-ignore
+      config.env.VERSION = 'commit-sha';
 
       // @ts-ignore: need to remock the format as it was call with a function first time
       winston.format = stubFormat({ ...infoStub, message: { description: 'unit-test' } });
@@ -106,7 +115,7 @@ describe('utils logger', () => {
 
       // In the mock, we also pass the timestamp though in development it is actually not there
       const expectedPrintfFormat = oneLineTrim`
-        [fakeEnvironment] info: [app] {\"description\":\"unit-test\"} {\"express\":{\"req\":{}},\"requestId\":\"requestId\",\"user\":\"userUuid\"}
+        [${config.env.ENVIRONMENT}] info: [app] {\"description\":\"unit-test\"} {\"express\":{\"req\":{}},\"requestId\":\"${requestId}\",\"user\":\"userUuid\",\"version\":\"${config.env.VERSION}\"}
       `;
       expect(winston.createLogger).toBeCalledWith({
         level: config.env.LOG_LEVEL,
@@ -206,7 +215,7 @@ describe('utils logger', () => {
         Object.defineProperty(process, 'platform', { value: originalPlatform });
       });
 
-      test('to NUL in windows', () => {
+      test('to NULL in windows', () => {
         jest.spyOn(fs, 'createWriteStream').mockImplementationOnce(jest.fn());
         Object.defineProperty(process, 'platform', { value: 'win32' });
         createWinstonLogger(label);
