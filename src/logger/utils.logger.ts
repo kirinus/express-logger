@@ -192,7 +192,10 @@ function sanitizeHeaders(req: Request, propName: string) {
  * @param logger The winston logger handler to be injected to express-winston.
  * @returns The express winston logger handler that serves as middleware.
  */
-export function createExpressWinstonHandler(logger: Logger): Handler {
+export function createExpressWinstonHandler(
+  logger: Logger,
+  options?: expressWinston.LoggerOptions,
+): Handler {
   return expressWinston.logger({
     winstonInstance: logger,
     meta: true,
@@ -203,5 +206,6 @@ export function createExpressWinstonHandler(logger: Logger): Handler {
     requestFilter: sanitizeHeaders,
     headerBlacklist: ['cookie', 'portal-authentication-token', 'token'],
     ignoreRoute: () => false,
+    ...options,
   });
 }
