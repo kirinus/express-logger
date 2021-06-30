@@ -236,15 +236,20 @@ describe('utils logger', () => {
 
   test('create express winston handler', () => {
     const loggerStub = {} as winston.Logger;
-    createExpressWinstonHandler(loggerStub);
+    createExpressWinstonHandler(loggerStub, {
+      winstonInstance: loggerStub,
+      bodyBlacklist: ['sensitive'],
+    });
 
     const calledParam = (expressWinston.logger as jest.Mock).mock.calls[0][0];
-    const { ignoreRoute, requestFilter } = calledParam;
+    const { ignoreRoute, requestFilter, responseFilter } = calledParam;
     expect(calledParam).toMatchObject({
+      bodyBlacklist: ['sensitive'],
       colorize: config.env.ENVIRONMENT === 'development',
       expressFormat: false,
       ignoreRoute: expect.any(Function),
       requestFilter: expect.anything(),
+      responseFilter: expect.anything(),
       meta: true,
       metaField: 'express',
       msg: '{{req.method}} {{req.url}}',
@@ -266,6 +271,20 @@ describe('utils logger', () => {
     });
     expect(requestFilter(req, 'fake')).toEqual(req.fake);
     expect(requestFilter({ headers: { test: '1' } }, 'headers')).toEqual({ test: '1' });
+    // Does not alter whitelisted properties
+    expect(responseFilter({ body: { param: 'isFake' } }, 'body')).toEqual({
+      param: 'isFake',
+    });
+    // Does not alter headers
+    expect(responseFilter({ headers: { sensitive: 'should not be redacted' } }, 'headers')).toEqual(
+      {
+        sensitive: 'should not be redacted',
+      },
+    );
+    // Redacts blacklisted properties
+    expect(responseFilter({ body: { sensitive: 'should be redacted' } }, 'body')).toEqual({
+      sensitive: 'REDACTED',
+    });
   });
 });
 /* eslint-enable @typescript-eslint/naming-convention */
