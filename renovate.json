@@ -6,7 +6,7 @@
   "commitMessageAction": "Pin",
   "commitMessageExtra": "{{#if isMajor}}v{{{newMajor}}}{{else}}{{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}{{/if}}",
   "commitMessageTopic": "{{depName}}",
-  "enabledManagers": ["nodenv", "yarn"],
+  "enabledManagers": ["nodenv", "npm", "nvm", "pre-commit", "regex"],
   "packageRules": [
     {
       "commitMessageSuffix": "dev",
