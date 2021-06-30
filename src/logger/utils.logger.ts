@@ -3,7 +3,6 @@ import * as expressWinston from 'express-winston';
 import * as fs from 'fs';
 import * as Transport from 'winston-transport';
 import { Handler } from 'express';
-import { Request } from 'express';
 import { TransformableInfo, format as logformFormat } from 'logform';
 import { MESSAGE } from 'triple-beam';
 import { Logger, config, createLogger, format, transports } from 'winston';
@@ -156,11 +155,11 @@ export function createWinstonLogger(label: string): WinstonLogger {
 /**
  * Redact secret data that might come from a header, like the JWT in the Authorization header.
  *
- * @param req The logged request by express-winston.
+ * @param req The filtered express-winston request.
  * @param propName The property of the logged request that will be adapted.
  * @returns The express request property, sanitized if it is 'headers'.
  */
-function sanitizeHeaders(req: Request, propName: string) {
+function sanitizeRequest(req: expressWinston.FilterRequest, propName: string) {
   if (propName === 'headers') {
     // The 'if-none-match' header can break logstash JSON format
     if ('if-none-match' in req.headers) req.headers['if-none-match'] = 'EXCLUDED';
@@ -187,6 +186,33 @@ function sanitizeHeaders(req: Request, propName: string) {
 }
 
 /**
+ * Redact blacklist body properties if specified.
+ *
+ * @param req The filtered express-winston response.
+ * @param propName The property of the logged request that will be adapted.
+ * @returns The express request property, sanitized if it is 'body'.
+ */
+function sanitizeResponse(
+  res: expressWinston.FilterResponse,
+  propName: string,
+  options?: expressWinston.LoggerOptions,
+) {
+  if (propName === 'body') {
+    const body: Record<string, unknown> | undefined = res['body'];
+    /* istanbul ignore next */
+    if (body && options?.bodyBlacklist) {
+      for (const key of options.bodyBlacklist) {
+        if (body[key]) {
+          body[key] = 'REDACTED';
+        }
+      }
+    }
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+  return (res as any)[propName];
+}
+
+/**
  * Retrieve the express winston logger handler middleware.
  *
  * @param logger The winston logger handler to be injected to express-winston.
@@ -203,7 +229,10 @@ export function createExpressWinstonHandler(
     msg: '{{req.method}} {{req.url}}',
     expressFormat: false,
     colorize: env.ENVIRONMENT === 'development',
-    requestFilter: sanitizeHeaders,
+    requestFilter: sanitizeRequest,
+    responseFilter: (res: expressWinston.FilterResponse, propName: string) =>
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      sanitizeResponse(res, propName, options),
     headerBlacklist: ['cookie', 'portal-authentication-token', 'token'],
     ignoreRoute: () => false,
     ...options,
