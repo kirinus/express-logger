@@ -5,7 +5,7 @@ import * as Transport from 'winston-transport';
 import { Handler } from 'express';
 import { TransformableInfo, format as logformFormat } from 'logform';
 import { MESSAGE } from 'triple-beam';
-import { Logger, config, createLogger, format, transports } from 'winston';
+import { config, createLogger, format, transports } from 'winston';
 
 import { env, isKubernetesEnv } from '../config';
 import { getRequestIdContext } from '../middleware/http-context.middleware';
@@ -153,11 +153,11 @@ export function createWinstonLogger(label: string): WinstonLogger {
 }
 
 /**
- * Redact secret data that might come from a header, like the JWT in the Authorization header.
+ * Redact sensitive information in the request, e.g. the JWT in the Authorization header.
  *
  * @param req The filtered express-winston request.
  * @param propName The property of the logged request that will be adapted.
- * @returns The express request property, sanitized if it is 'headers'.
+ * @returns The sanitized express response property.
  */
 function sanitizeRequest(req: expressWinston.FilterRequest, propName: string) {
   if (propName === 'headers') {
@@ -186,44 +186,57 @@ function sanitizeRequest(req: expressWinston.FilterRequest, propName: string) {
 }
 
 /**
- * Redact blacklist body properties if specified.
+ * Redact sensitive information in the response, e.g. a token the response body.
  *
  * @param req The filtered express-winston response.
  * @param propName The property of the logged request that will be adapted.
- * @returns The express request property, sanitized if it is 'body'.
+ * @param options The express-winston logger options.
+ * @returns The sanitized express request property.
  */
 function sanitizeResponse(
   res: expressWinston.FilterResponse,
   propName: string,
-  options?: expressWinston.LoggerOptions,
+  options: expressWinston.LoggerOptionsWithWinstonInstance,
 ) {
   if (propName === 'body') {
-    const body: Record<string, unknown> | undefined = res['body'];
-    /* istanbul ignore next */
-    if (body && options?.bodyBlacklist) {
-      for (const key of options.bodyBlacklist) {
-        if (body[key]) {
-          body[key] = 'REDACTED';
-        }
-      }
-    }
+    res['body'] = bodySanitizer({ ...res['body'] }, options.bodyBlacklist);
   }
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
   return (res as any)[propName];
 }
 
 /**
+ * Redacts blacklisted body properties from the request / response body.
+ *
+ * @param body The express-winston request / response body.
+ * @param bodyBlacklist The express-winston body blacklist.
+ * @returns The sanitized 'body'.
+ */
+function bodySanitizer(
+  body: Record<string, unknown> | undefined,
+  bodyBlacklist: string[] | undefined,
+): Record<string, unknown> | undefined {
+  /* istanbul ignore else: else path does not matter */
+  if (body && bodyBlacklist) {
+    for (const key of bodyBlacklist) {
+      if (body && body[key]) {
+        body[key] = 'REDACTED';
+      }
+    }
+  }
+  return body;
+}
+
+/**
  * Retrieve the express winston logger handler middleware.
  *
- * @param logger The winston logger handler to be injected to express-winston.
+ * @param options The express-winston logger options.
  * @returns The express winston logger handler that serves as middleware.
  */
 export function createExpressWinstonHandler(
-  logger: Logger,
-  options?: expressWinston.LoggerOptions,
+  options: expressWinston.LoggerOptionsWithWinstonInstance,
 ): Handler {
   return expressWinston.logger({
-    winstonInstance: logger,
     meta: true,
     metaField: 'express',
     msg: '{{req.method}} {{req.url}}',
@@ -233,7 +246,6 @@ export function createExpressWinstonHandler(
     responseFilter: (res: expressWinston.FilterResponse, propName: string) =>
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       sanitizeResponse(res, propName, options),
-    headerBlacklist: ['cookie', 'portal-authentication-token', 'token'],
     ignoreRoute: () => false,
     ...options,
   });

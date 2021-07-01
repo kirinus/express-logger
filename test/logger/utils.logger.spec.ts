@@ -234,56 +234,66 @@ describe('utils logger', () => {
     });
   });
 
-  test('create express winston handler', () => {
+  describe('create express winston handler', () => {
     const loggerStub = {} as winston.Logger;
-    createExpressWinstonHandler(loggerStub, {
+    createExpressWinstonHandler({
       winstonInstance: loggerStub,
       bodyBlacklist: ['sensitive'],
     });
-
     const calledParam = (expressWinston.logger as jest.Mock).mock.calls[0][0];
     const { ignoreRoute, requestFilter, responseFilter } = calledParam;
-    expect(calledParam).toMatchObject({
-      bodyBlacklist: ['sensitive'],
-      colorize: config.env.ENVIRONMENT === 'development',
-      expressFormat: false,
-      ignoreRoute: expect.any(Function),
-      requestFilter: expect.anything(),
-      responseFilter: expect.anything(),
-      meta: true,
-      metaField: 'express',
-      msg: '{{req.method}} {{req.url}}',
-      winstonInstance: loggerStub,
+
+    test('instantiates correctly', () => {
+      expect(calledParam).toMatchObject({
+        bodyBlacklist: ['sensitive'],
+        colorize: config.env.ENVIRONMENT === 'development',
+        expressFormat: false,
+        ignoreRoute: expect.any(Function),
+        requestFilter: expect.anything(),
+        responseFilter: expect.anything(),
+        meta: true,
+        metaField: 'express',
+        msg: '{{req.method}} {{req.url}}',
+        winstonInstance: loggerStub,
+      });
+      expect(ignoreRoute()).toBe(false);
     });
-    expect(ignoreRoute()).toBe(false);
-    const req = {
-      headers: {
-        authorization: 'Bearer MYSECRETJWTTOKEN',
-        'if-none-match': 'W/"2da-0kj/eLumj9c7RIVAqQqLv+KH0h4"',
-        cookie: 'AccessToken=Secret; RefreshToken=Secret; OtherCookie=NoSecret',
-      },
-      fake: { param: 'isFake' },
-    };
-    expect(requestFilter(req, 'headers')).toEqual({
-      authorization: 'Bearer [REDACTED]',
-      'if-none-match': 'EXCLUDED',
-      cookie: 'AccessToken=REDACTED; RefreshToken=REDACTED; OtherCookie=NoSecret',
+
+    test('requestFilter', () => {
+      const req = {
+        headers: {
+          authorization: 'Bearer MYSECRETJWTTOKEN',
+          'if-none-match': 'W/"2da-0kj/eLumj9c7RIVAqQqLv+KH0h4"',
+          cookie: 'AccessToken=Secret; RefreshToken=Secret; OtherCookie=NoSecret',
+        },
+        fake: { param: 'isFake' },
+      };
+      expect(requestFilter(req, 'headers')).toEqual({
+        authorization: 'Bearer [REDACTED]',
+        'if-none-match': 'EXCLUDED',
+        cookie: 'AccessToken=REDACTED; RefreshToken=REDACTED; OtherCookie=NoSecret',
+      });
+      expect(requestFilter(req, 'fake')).toEqual(req.fake);
+      expect(requestFilter({ headers: { test: '1' } }, 'headers')).toEqual({ test: '1' });
     });
-    expect(requestFilter(req, 'fake')).toEqual(req.fake);
-    expect(requestFilter({ headers: { test: '1' } }, 'headers')).toEqual({ test: '1' });
-    // Does not alter whitelisted properties
-    expect(responseFilter({ body: { param: 'isFake' } }, 'body')).toEqual({
-      param: 'isFake',
-    });
-    // Does not alter headers
-    expect(responseFilter({ headers: { sensitive: 'should not be redacted' } }, 'headers')).toEqual(
-      {
+
+    test('responseFilter', () => {
+      // Skips undefined body
+      expect(responseFilter({ body: undefined }, 'body')).toEqual({});
+      // Does not alter whitelisted properties
+      expect(responseFilter({ body: { param: 'isFake' } }, 'body')).toEqual({
+        param: 'isFake',
+      });
+      // Does not alter headers
+      expect(
+        responseFilter({ headers: { sensitive: 'should not be redacted' } }, 'headers'),
+      ).toEqual({
         sensitive: 'should not be redacted',
-      },
-    );
-    // Redacts blacklisted properties
-    expect(responseFilter({ body: { sensitive: 'should be redacted' } }, 'body')).toEqual({
-      sensitive: 'REDACTED',
+      });
+      // Redacts blacklisted properties
+      expect(responseFilter({ body: { sensitive: 'should be redacted' } }, 'body')).toEqual({
+        sensitive: 'REDACTED',
+      });
     });
   });
 });
