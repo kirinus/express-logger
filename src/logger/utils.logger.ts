@@ -228,7 +228,7 @@ function bodySanitizer(
 }
 
 /**
- * Retrieve the express winston logger handler middleware.
+ * Create express winston logger handler middleware.
  *
  * @param options The express-winston logger options.
  * @returns The express winston logger handler that serves as middleware.
