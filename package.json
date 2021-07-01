@@ -27,6 +27,8 @@
   "scripts": {
     "build": "tsc -b -v",
     "lint": "eslint --cache --parser-options \"{ tsconfigRootDir: $(pwd), project: '$(pwd)/tsconfig.json' }\" --cache-file $(pwd)/.eslintcache $(pwd)/src $(pwd)/test",
+    "prettier": "prettier -c \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prettier:fix": "prettier -c \"src/**/*.ts\" \"test/**/*.ts\" --write",
     "prepare": "yarn dlx husky install",
     "test": "jest --coverage --verbose --no-cache"
   },

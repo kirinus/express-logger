@@ -27,7 +27,7 @@ export const requestIdHandler = (_: Request, __: Response, next: NextFunction): 
  * @returns The injected request id retrieved from the http context.
  */
 export function getRequestIdContext(): string | undefined {
-  const requestId: unknown = httpContext.get('requestId') ;
+  const requestId: unknown = httpContext.get('requestId');
   if (requestId) {
     return String(requestId);
   }
