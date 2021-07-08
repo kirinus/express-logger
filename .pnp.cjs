@@ -48,7 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/pnpify", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.0.0-rc.7"],
             ["common-tags", "npm:1.8.0"],
             ["danger", "npm:10.6.6"],
-            ["envalid", "npm:6.0.2"],
+            ["envalid", "npm:7.1.1"],
             ["eslint", "npm:7.29.0"],
             ["eslint-config-prettier", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:8.3.0"],
             ["eslint-import-resolver-node", "npm:0.3.4"],
@@ -1626,7 +1626,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/pnpify", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.0.0-rc.7"],
             ["common-tags", "npm:1.8.0"],
             ["danger", "npm:10.6.6"],
-            ["envalid", "npm:6.0.2"],
+            ["envalid", "npm:7.1.1"],
             ["eslint", "npm:7.29.0"],
             ["eslint-config-prettier", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:8.3.0"],
             ["eslint-import-resolver-node", "npm:0.3.4"],
@@ -4568,15 +4568,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["dotenv", [
-        ["npm:8.6.0", {
-          "packageLocation": "./.yarn/cache/dotenv-npm-8.6.0-2ce3e9f7bb-38e902c80b.zip/node_modules/dotenv/",
-          "packageDependencies": [
-            ["dotenv", "npm:8.6.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["ecdsa-sig-formatter", [
         ["npm:1.0.11", {
           "packageLocation": "./.yarn/cache/ecdsa-sig-formatter-npm-1.0.11-b6784e7852-207f9ab1c2.zip/node_modules/ecdsa-sig-formatter/",
@@ -4699,14 +4690,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["envalid", [
-        ["npm:6.0.2", {
-          "packageLocation": "./.yarn/cache/envalid-npm-6.0.2-64bc46d6f8-49efa1b886.zip/node_modules/envalid/",
+        ["npm:7.1.1", {
+          "packageLocation": "./.yarn/cache/envalid-npm-7.1.1-1979981b2b-11b637575f.zip/node_modules/envalid/",
           "packageDependencies": [
-            ["envalid", "npm:6.0.2"],
-            ["chalk", "npm:3.0.0"],
-            ["dotenv", "npm:8.6.0"],
-            ["meant", "npm:1.0.3"],
-            ["validator", "npm:13.6.0"]
+            ["envalid", "npm:7.1.1"]
           ],
           "linkType": "HARD",
         }]
@@ -8301,15 +8288,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["meant", [
-        ["npm:1.0.3", {
-          "packageLocation": "./.yarn/cache/meant-npm-1.0.3-6ca1974dda-10d5a8534c.zip/node_modules/meant/",
-          "packageDependencies": [
-            ["meant", "npm:1.0.3"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["media-typer", [
         ["npm:0.3.0", {
           "packageLocation": "./.yarn/cache/media-typer-npm-0.3.0-8674f8f0f5-af1b38516c.zip/node_modules/media-typer/",
@@ -11469,15 +11447,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["validate-npm-package-license", "npm:3.0.4"],
             ["spdx-correct", "npm:3.1.1"],
             ["spdx-expression-parse", "npm:3.0.1"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["validator", [
-        ["npm:13.6.0", {
-          "packageLocation": "./.yarn/cache/validator-npm-13.6.0-2ca88b50f3-1f9f813228.zip/node_modules/validator/",
-          "packageDependencies": [
-            ["validator", "npm:13.6.0"]
           ],
           "linkType": "HARD",
         }]

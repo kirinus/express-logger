@@ -1148,7 +1148,7 @@ __metadata:
     "@yarnpkg/pnpify": ~3.0.0-rc.7
     common-tags: ~1.8.0
     danger: ~10.6.6
-    envalid: ~6.0.2
+    envalid: ~7.1.1
     eslint: ~7.29.0
     eslint-config-prettier: ~8.3.0
     eslint-import-resolver-node: ~0.3.4
@@ -3602,13 +3602,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^8.2.0":
-  version: 8.6.0
-  resolution: "dotenv@npm:8.6.0"
-  checksum: 38e902c80b0666ab59e9310a3d24ed237029a7ce34d976796349765ac96b8d769f6df19090f1f471b77a25ca391971efde8a1ea63bb83111bd8bec8e5cc9b2cd
-  languageName: node
-  linkType: hard
-
 "ecdsa-sig-formatter@npm:1.0.11":
   version: 1.0.11
   resolution: "ecdsa-sig-formatter@npm:1.0.11"
@@ -3712,15 +3705,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"envalid@npm:~6.0.2":
-  version: 6.0.2
-  resolution: "envalid@npm:6.0.2"
-  dependencies:
-    chalk: ^3.0.0
-    dotenv: ^8.2.0
-    meant: ^1.0.1
-    validator: ^13.0.0
-  checksum: 49efa1b88629fdea030f3c148fd2057820e2c762d5b824553047c9abfc1d156a482a0cb4c55ec646438c62bfd288ac1de463b0fe833431fca45f41a6eae66a4a
+"envalid@npm:~7.1.1":
+  version: 7.1.1
+  resolution: "envalid@npm:7.1.1"
+  checksum: 11b637575f09118dcf237febeeae3c0fea6abf0e0b27b5be99b72d92e0b893d92a598cfc73335d9c7074ff8d0ec57ef66dc827a4e59c0dcce85ea6018d877ec0
   languageName: node
   linkType: hard
 
@@ -6861,13 +6849,6 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"meant@npm:^1.0.1":
-  version: 1.0.3
-  resolution: "meant@npm:1.0.3"
-  checksum: 10d5a8534c51ff4847fa971c364c42e01a4c8a529e186cc1dcff7d667e4ec1383b9c1f8fcc00a4f6e4649f48eff943c6de31353e7212f90e8301517168465723
-  languageName: node
-  linkType: hard
-
 "media-typer@npm:0.3.0":
   version: 0.3.0
   resolution: "media-typer@npm:0.3.0"
@@ -9658,13 +9639,6 @@ typescript@~4.3.4:
     spdx-correct: ^3.0.0
     spdx-expression-parse: ^3.0.0
   checksum: 35703ac889d419cf2aceef63daeadbe4e77227c39ab6287eeb6c1b36a746b364f50ba22e88591f5d017bc54685d8137bc2d328d0a896e4d3fd22093c0f32a9ad
-  languageName: node
-  linkType: hard
-
-"validator@npm:^13.0.0":
-  version: 13.6.0
-  resolution: "validator@npm:13.6.0"
-  checksum: 1f9f813228a709d993b965813ad9d8ce009717bec64f57a0ac40d5f50ef781ee47260f85741e125775823fb31aa3beb7f974e0f5fb1afe9bc4615b7fadd7f8bb
   languageName: node
   linkType: hard
 
