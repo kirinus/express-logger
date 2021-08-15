@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Create release draft
+      id: release-wizard
       uses: darioblanco/release-wizard@main
       with:
         draft: true
