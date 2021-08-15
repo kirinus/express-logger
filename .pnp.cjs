@@ -42,7 +42,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:26.0.23"],
             ["@types/node", "npm:15.12.4"],
             ["@types/triple-beam", "npm:1.3.2"],
-            ["@types/uuid", "npm:8.3.0"],
+            ["@types/uuid", "npm:8.3.1"],
             ["@typescript-eslint/eslint-plugin", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:4.28.0"],
             ["@typescript-eslint/parser", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:4.28.0"],
             ["@yarnpkg/pnpify", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.0.0-rc.7"],
@@ -1620,7 +1620,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:26.0.23"],
             ["@types/node", "npm:15.12.4"],
             ["@types/triple-beam", "npm:1.3.2"],
-            ["@types/uuid", "npm:8.3.0"],
+            ["@types/uuid", "npm:8.3.1"],
             ["@typescript-eslint/eslint-plugin", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:4.28.0"],
             ["@typescript-eslint/parser", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:4.28.0"],
             ["@yarnpkg/pnpify", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.0.0-rc.7"],
@@ -2289,10 +2289,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@types/uuid", [
-        ["npm:8.3.0", {
-          "packageLocation": "./.yarn/cache/@types-uuid-npm-8.3.0-60b441a3d7-0f46b15020.zip/node_modules/@types/uuid/",
+        ["npm:8.3.1", {
+          "packageLocation": "./.yarn/cache/@types-uuid-npm-8.3.1-4239b14bac-b41bdc5e86.zip/node_modules/@types/uuid/",
           "packageDependencies": [
-            ["@types/uuid", "npm:8.3.0"]
+            ["@types/uuid", "npm:8.3.1"]
           ],
           "linkType": "HARD",
         }]
