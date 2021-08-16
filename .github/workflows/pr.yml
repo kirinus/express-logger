@@ -4,10 +4,21 @@ name: PR
     types:
     - opened
     - edited
+    - ready_for_review
     - reopened
     - synchronize
 jobs:
-  danger:
+  test-unit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Do nothing
+      run: exit 0
+  test-integration:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Do nothing
+      run: exit 0
+  test:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout current git repository
@@ -15,7 +26,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 14.17.1
+        node-version: 14.17.5
     - name: Install yarn dependencies
       run: yarn install --immutable
     - name: Run Danger
@@ -36,3 +47,16 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         configuration-path: .github/pr-path-labeler.yml
         sync-labels: false
+  jira:
+    if: github.event.action == 'ready_for_review'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Manage JIRA tasks
+      uses: darioblanco/jira-wizard@main
+      with:
+        host: ${{ secrets.JIRA_HOST }}
+        email: ${{ secrets.JIRA_EMAIL }}
+        apiToken: ${{ secrets.JIRA_API_TOKEN }}
+        projectKey: MHP
+        app: ${{ env.PACKAGE }}
+        transitionId: "21"
