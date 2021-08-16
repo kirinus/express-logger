@@ -38,7 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/cli", "npm:12.1.4"],
             ["@commitlint/config-conventional", "npm:12.1.4"],
             ["@types/common-tags", "npm:1.8.0"],
-            ["@types/express", "npm:4.17.12"],
+            ["@types/express", "npm:4.17.13"],
             ["@types/jest", "npm:26.0.23"],
             ["@types/node", "npm:15.12.4"],
             ["@types/triple-beam", "npm:1.3.2"],
@@ -1616,7 +1616,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/cli", "npm:12.1.4"],
             ["@commitlint/config-conventional", "npm:12.1.4"],
             ["@types/common-tags", "npm:1.8.0"],
-            ["@types/express", "npm:4.17.12"],
+            ["@types/express", "npm:4.17.13"],
             ["@types/jest", "npm:26.0.23"],
             ["@types/node", "npm:15.12.4"],
             ["@types/triple-beam", "npm:1.3.2"],
@@ -2018,10 +2018,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["npm:4.17.12", {
-          "packageLocation": "./.yarn/cache/@types-express-npm-4.17.12-d30bfc5b29-5869f575f6.zip/node_modules/@types/express/",
+        ["npm:4.17.13", {
+          "packageLocation": "./.yarn/cache/@types-express-npm-4.17.13-0e12fe9c24-12a2a0e6c4.zip/node_modules/@types/express/",
           "packageDependencies": [
-            ["@types/express", "npm:4.17.12"],
+            ["@types/express", "npm:4.17.13"],
             ["@types/body-parser", "npm:1.19.0"],
             ["@types/express-serve-static-core", "npm:4.17.19"],
             ["@types/qs", "npm:6.9.6"],
