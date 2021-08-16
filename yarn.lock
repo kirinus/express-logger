@@ -1137,7 +1137,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ~12.1.4
     "@commitlint/config-conventional": ~12.1.4
-    "@types/common-tags": ~1.8.0
+    "@types/common-tags": ~1.8.1
     "@types/express": ~4.17.12
     "@types/jest": ~26.0.24
     "@types/node": ~15.12.4
@@ -1459,10 +1459,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/common-tags@npm:~1.8.0":
-  version: 1.8.0
-  resolution: "@types/common-tags@npm:1.8.0"
-  checksum: eafc204e3deb288bb921567fd2f7b4e07184f520ae06f4d5630f54ddcbdd9431caee38e868c4d26a61f15f51f0c82977f8b4846331af31532fd28f6c36fe61cc
+"@types/common-tags@npm:~1.8.1":
+  version: 1.8.1
+  resolution: "@types/common-tags@npm:1.8.1"
+  checksum: bec6f68c8c434834380abd1dc057aa6ba26661bb0c65c700b65049e9b104d7be96a987d93dbe8726be68554a23a52514a6967d8903fdb51fb8c78cf909d1e4c1
   languageName: node
   linkType: hard
 

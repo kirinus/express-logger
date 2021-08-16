@@ -37,7 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@commitlint/cli", "npm:12.1.4"],
             ["@commitlint/config-conventional", "npm:12.1.4"],
-            ["@types/common-tags", "npm:1.8.0"],
+            ["@types/common-tags", "npm:1.8.1"],
             ["@types/express", "npm:4.17.12"],
             ["@types/jest", "npm:26.0.24"],
             ["@types/node", "npm:15.12.4"],
@@ -1615,7 +1615,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@kirinus-digital/express-logger", "workspace:."],
             ["@commitlint/cli", "npm:12.1.4"],
             ["@commitlint/config-conventional", "npm:12.1.4"],
-            ["@types/common-tags", "npm:1.8.0"],
+            ["@types/common-tags", "npm:1.8.1"],
             ["@types/express", "npm:4.17.12"],
             ["@types/jest", "npm:26.0.24"],
             ["@types/node", "npm:15.12.4"],
@@ -1979,10 +1979,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@types/common-tags", [
-        ["npm:1.8.0", {
-          "packageLocation": "./.yarn/cache/@types-common-tags-npm-1.8.0-812cad42b1-eafc204e3d.zip/node_modules/@types/common-tags/",
+        ["npm:1.8.1", {
+          "packageLocation": "./.yarn/cache/@types-common-tags-npm-1.8.1-cb81ee674b-bec6f68c8c.zip/node_modules/@types/common-tags/",
           "packageDependencies": [
-            ["@types/common-tags", "npm:1.8.0"]
+            ["@types/common-tags", "npm:1.8.1"]
           ],
           "linkType": "HARD",
         }]
