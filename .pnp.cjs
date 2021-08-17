@@ -51,7 +51,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["envalid", "npm:6.0.2"],
             ["eslint", "npm:7.29.0"],
             ["eslint-config-prettier", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:8.3.0"],
-            ["eslint-import-resolver-node", "npm:0.3.4"],
+            ["eslint-import-resolver-node", "npm:0.3.6"],
             ["eslint-plugin-eslint-comments", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.2.0"],
             ["eslint-plugin-import", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:2.23.4"],
             ["eslint-plugin-jest", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:24.3.6"],
@@ -1629,7 +1629,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["envalid", "npm:6.0.2"],
             ["eslint", "npm:7.29.0"],
             ["eslint-config-prettier", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:8.3.0"],
-            ["eslint-import-resolver-node", "npm:0.3.4"],
+            ["eslint-import-resolver-node", "npm:0.3.6"],
             ["eslint-plugin-eslint-comments", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:3.2.0"],
             ["eslint-plugin-import", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:2.23.4"],
             ["eslint-plugin-jest", "virtual:3de7d785c69e8c79f345a2fea17aaa0fe1134d5eee46e8711b121a633a0a6fcae8178162e918d139895845c3427f5dc0df2edd8b9ec70407d70badf60ffe7072#npm:24.3.6"],
@@ -4940,6 +4940,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["eslint-import-resolver-node", "npm:0.3.4"],
             ["debug", "virtual:2bcc47d217f870e3d52f0e55493dc34fd3da852877f7db32fa2940cc320151746026495daf6a34a974488cf5a949d93be1e2dc1ffba036faf081a9b15fcd2252#npm:2.6.9"],
+            ["resolve", "patch:resolve@npm%3A1.20.0#~builtin<compat/resolve>::version=1.20.0&hash=00b1ff"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:0.3.6", {
+          "packageLocation": "./.yarn/cache/eslint-import-resolver-node-npm-0.3.6-d9426786c6-6266733af1.zip/node_modules/eslint-import-resolver-node/",
+          "packageDependencies": [
+            ["eslint-import-resolver-node", "npm:0.3.6"],
+            ["debug", "virtual:8bb97bed484f021974a05538f31c077871d2363ce26ebed59b11577446762350604c9011c0660ae55b141dd86d888615a377ccccd7a87c5e54ae38233a22d5a9#npm:3.2.7"],
             ["resolve", "patch:resolve@npm%3A1.20.0#~builtin<compat/resolve>::version=1.20.0&hash=00b1ff"]
           ],
           "linkType": "HARD",
