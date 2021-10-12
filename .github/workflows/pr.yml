@@ -8,16 +8,6 @@ name: PR
     - reopened
     - synchronize
 jobs:
-  test-unit:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Do nothing
-      run: exit 0
-  test-integration:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Do nothing
-      run: exit 0
   test:
     runs-on: ubuntu-latest
     steps:
@@ -47,16 +37,3 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         configuration-path: .github/pr-path-labeler.yml
         sync-labels: false
-  jira:
-    if: github.event.action == 'ready_for_review'
-    runs-on: ubuntu-latest
-    steps:
-    - name: Manage JIRA tasks
-      uses: darioblanco/jira-wizard@main
-      with:
-        host: ${{ secrets.JIRA_HOST }}
-        email: ${{ secrets.JIRA_EMAIL }}
-        apiToken: ${{ secrets.JIRA_API_TOKEN }}
-        projectKey: MHP
-        app: ${{ env.PACKAGE }}
-        transitionId: "21"
